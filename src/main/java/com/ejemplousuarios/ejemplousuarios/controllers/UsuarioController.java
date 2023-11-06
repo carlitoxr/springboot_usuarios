@@ -42,6 +42,12 @@ public class UsuarioController {
         usuarioDao.eliminar(id);
     }
 
+    @RequestMapping(path = "api/usuarios", method = RequestMethod.POST)
+    @ResponseBody
+    public void registrarUsuario(@RequestBody Usuario usuario) {
+        usuarioDao.registrar(usuario);
+    }
+
 /*
     @RequestMapping(value = "usuario/{id}")
     public Usuario editar(@PathVariable int id) {
