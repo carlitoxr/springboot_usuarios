@@ -19,7 +19,7 @@ public class UsuarioController {
         return List.of("Manzana", "Naranja", "Pera");
     }
 
-    @RequestMapping(value = "usuario/{id}")
+    @RequestMapping(value = "api/usuario/{id}")
     public Usuario getUsuario(@PathVariable int id) {
         Usuario usuario = new Usuario();
         usuario.setId(id);
@@ -31,42 +31,15 @@ public class UsuarioController {
         return usuario;
     }
 
-    @RequestMapping(path = "usuarios", method = RequestMethod.GET)
+    @RequestMapping(path = "api/usuarios", method = RequestMethod.GET)
     @ResponseBody
     public List<Usuario> getUsuarios() {
         return usuarioDao.getUsuarios();
+    }
 
-        /*List<Usuario> usuarios = new ArrayList<>();
-
-        Usuario usuario = new Usuario();
-        usuario.setId(123);
-        usuario.setNombre("Pepe");
-        usuario.setApellido("Perez");
-        usuario.setTelefono("091123456");
-        usuario.setEmail("pepeperez@usuario.com");
-        usuario.setPassword("123456");
-
-        Usuario usuario2 = new Usuario();
-        usuario2.setId(456);
-        usuario2.setNombre("José");
-        usuario2.setApellido("González");
-        usuario2.setTelefono("091111222");
-        usuario2.setEmail("josegonzalez@usuario.com");
-        usuario2.setPassword("456");
-
-        Usuario usuario3 = new Usuario();
-        usuario3.setId(789);
-        usuario3.setNombre("Luis");
-        usuario3.setApellido("Gómez");
-        usuario3.setTelefono("091333444");
-        usuario3.setEmail("luisgomez@usuario.com");
-        usuario3.setPassword("789");
-
-        usuarios.add(usuario);
-        usuarios.add(usuario2);
-        usuarios.add(usuario3);
-        return usuarios;*/
-
+    @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.DELETE)
+    public void eliminar(@PathVariable int id) {
+        usuarioDao.eliminar(id);
     }
 
 /*
