@@ -13,10 +13,11 @@ public class AuthController {
 
     @RequestMapping(path = "api/login", method = RequestMethod.POST)
     public String login(@RequestBody Usuario usuario) {
+
         if(usuarioDao.verificarCredenciales(usuario)) {
             return "OK";
-        } else {
-            return "FAIL!!!";
         }
+            return "FAIL!!!";
+
     }
 }

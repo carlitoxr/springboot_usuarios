@@ -18,7 +18,7 @@ public class Usuario {
     private String email;
     @Column(name = "telefono")
     private String telefono;
-    @Column(name = "pass")
+    @Column(name = "password")
     private String password;
 
     public int getId() {
