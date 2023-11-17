@@ -9,7 +9,7 @@ public interface UsuarioDao {
     List<Usuario> getUsuarios();
     void eliminar(int id);
     void registrar(Usuario usuario);
-    boolean verificarCredenciales(Usuario usuario);
+    Usuario obtenerUsuarioPorCredenciales(Usuario usuario);
     //String verificarCredenciales(Usuario usuario);
 
 }
