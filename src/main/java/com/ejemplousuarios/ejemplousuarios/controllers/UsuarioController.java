@@ -2,6 +2,7 @@ package com.ejemplousuarios.ejemplousuarios.controllers;
 
 import com.ejemplousuarios.ejemplousuarios.dao.UsuarioDao;
 import com.ejemplousuarios.ejemplousuarios.models.Usuario;
+import com.ejemplousuarios.ejemplousuarios.utils.JWTUtil;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioDao usuarioDao;
+
+    @Autowired
+    private JWTUtil jwtUtil;
 
     @RequestMapping(value = "prueba")
     public List<String> prueba() {
@@ -35,12 +39,32 @@ public class UsuarioController {
 
     @RequestMapping(path = "api/usuarios", method = RequestMethod.GET)
     @ResponseBody
-    public List<Usuario> getUsuarios() {
+    //public List<Usuario> getUsuarios() {
+    // Agregando la verificación del tocken jwt
+    public List<Usuario> getUsuarios(@RequestHeader(value = "Authorization") String token) {
+
+        if(!validarToken(token)) {
+            return null;
+        }
+
         return usuarioDao.getUsuarios();
     }
 
+    public boolean validarToken(String token) {
+        // Se extrae la id (key) del usuario
+        String usuarioId = jwtUtil.getKey(token);
+
+        return usuarioId != null;
+    }
+
     @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.DELETE)
-    public void eliminar(@PathVariable int id) {
+    public void eliminar(@RequestHeader(value = "Authorization") String token,
+                         @PathVariable int id) {
+
+        if(!validarToken(token)) {
+            return;
+        }
+
         usuarioDao.eliminar(id);
     }
 

@@ -21,7 +21,7 @@ async function iniciarSesion(){
     if(respuesta != 'FAIL') { // Queda pendiente cambiar por el tipo de error, que sería el 401
 
         // Se guarda el tocke en el local storage
-        localStorage.tocken = respuesta;
+        localStorage.token = respuesta;
         localStorage.email = datos.email;
 
         window.location.href = 'usuarios.html';

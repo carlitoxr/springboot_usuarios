@@ -24,9 +24,9 @@ public class AuthController {
 
             // Se retorna el tocke + info que se requiera
             // Se agrega jwt
-            String tockenJwt = jwtUtil.create(String.valueOf(usuarioLogueado.getId()), usuario.getEmail());
+            String tokenJwt = jwtUtil.create(String.valueOf(usuarioLogueado.getId()), usuario.getEmail());
 
-            return tockenJwt;
+            return tokenJwt;
         }
             return "FAIL!!!";
 

@@ -2,7 +2,12 @@
 $(document).ready(function() {
   cargarUsuarios();
   $('#usuarios').DataTable();
+  actualizarEmailDelUsuario();
 });
+
+function actualizarEmailDelUsuario() {
+    document.getElementById('txt-email-usuario').outerHTML = localStorage.email;
+}
 
 async function cargarUsuarios(){
 
@@ -10,7 +15,8 @@ async function cargarUsuarios(){
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.token
       },
       //body: JSON.stringify({a: 1, b: 'Textual content'})
     });
@@ -49,7 +55,9 @@ async function eliminarUsuario(id) {
           method: 'DELETE',
           headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            //Se agrega el tocken en el header
+            'Authorization': localStorage.token
           },
           //body: JSON.stringify({a: 1, b: 'Textual content'})
         });
