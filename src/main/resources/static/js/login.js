@@ -18,7 +18,12 @@ async function iniciarSesion(){
     //const respuesta = await request.json(); No es un json, es un texto, por eso lo siguiente:
     const respuesta = await request.text();
 
-    if(respuesta == 'OK') {
+    if(respuesta != 'FAIL') { // Queda pendiente cambiar por el tipo de error, que sería el 401
+
+        // Se guarda el tocke en el local storage
+        localStorage.tocken = respuesta;
+        localStorage.email = datos.email;
+
         window.location.href = 'usuarios.html';
     } else {
         alert('Las credenciales son invalidas.');

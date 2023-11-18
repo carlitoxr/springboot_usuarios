@@ -1,6 +1,6 @@
 package com.ejemplousuarios.ejemplousuarios.utils;
 
-import io.jsonwebtoken.Claims;
+/*import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -11,6 +11,20 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
 import jakarta.xml.bind.DatatypeConverter;
+import java.security.Key;
+import java.util.Date;*/
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
+//import java.util.Base64;
 import java.security.Key;
 import java.util.Date;
 
@@ -48,6 +62,7 @@ public class JWTUtil {
 
         //  sign JWT with our ApiKey secret
         byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(key);
+        //byte[] apiKeySecretBytes = Base64.getDecoder().decode(key);
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
         //  set the JWT Claims
@@ -75,6 +90,8 @@ public class JWTUtil {
         // expected)
         Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(key))
                 .parseClaimsJws(jwt).getBody();
+        /*Claims claims = Jwts.parser().setSigningKey(Base64.getDecoder().decode(key))
+                .parseClaimsJws(jwt).getBody();*/
 
         return claims.getSubject();
     }
@@ -90,6 +107,8 @@ public class JWTUtil {
         // expected)
         Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(key))
                 .parseClaimsJws(jwt).getBody();
+        /*Claims claims = Jwts.parser().setSigningKey(Base64.getDecoder().decode(key))
+                .parseClaimsJws(jwt).getBody();*/
 
         return claims.getId();
     }

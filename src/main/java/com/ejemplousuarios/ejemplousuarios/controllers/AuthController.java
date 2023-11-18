@@ -23,7 +23,7 @@ public class AuthController {
         if(usuarioLogueado != null) {
 
             // Se retorna el tocke + info que se requiera
-            // Se agrega el jwt
+            // Se agrega jwt
             String tockenJwt = jwtUtil.create(String.valueOf(usuarioLogueado.getId()), usuario.getEmail());
 
             return tockenJwt;
